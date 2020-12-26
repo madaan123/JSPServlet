@@ -26,5 +26,13 @@ names[2]="Ria";
 ${name}
 <br/>
 </c:forEach>
+
+<%-- forToken tag to tokenize a string in jstl --%>
+<%! public String URL = "www.google.com"; %>
+<c:forTokens items="<%=URL%>" delims="." var="token">
+${token} 
+<br/>
+</c:forTokens>
+
 </body>
 </html>
