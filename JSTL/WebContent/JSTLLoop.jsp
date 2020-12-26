@@ -8,9 +8,22 @@
 <title>Loop</title>
 </head>
 <body>
-<%-- loop in jstl increment by 1 as default --%>
+<%-- for loop in jstl increment by 1 as default --%>
 <c:forEach var="i" begin="0" end="30" step="3">
 ${i}
+<br/>
+</c:forEach>
+
+<%
+String[] names = new String[3];
+names[0]="Ashish";
+names[1]="Rahul";
+names[2]="Ria";
+%>
+
+<%-- for each loop in jstl --%>
+<c:forEach items="<%=names %>" var="name" >
+${name}
 <br/>
 </c:forEach>
 </body>
