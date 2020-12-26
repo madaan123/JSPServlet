@@ -1,5 +1,9 @@
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-<c:import url="/Include/Header.jsp"> </c:import>
+
+<c:import url="/Include/Header.jsp"> 
+<c:param name="title" value="JSTL TAG"> </c:param>
+</c:import>
+
 <c:set var="name" value="Ashish"></c:set> 	<%-- setting a jstl tag via set --%>
 ${name} <%-- expression tag --%>
 <c:out value="${name}"></c:out>
