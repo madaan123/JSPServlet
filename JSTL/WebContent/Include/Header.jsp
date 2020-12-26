@@ -4,6 +4,6 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>JSTL Demo</title>
+<title>${param.title}</title>
 </head>
 <body>
