@@ -1,5 +1,6 @@
 package org.studyeasy;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -32,8 +33,9 @@ public class ImageUpload extends HttpServlet {
 				String name = image.getName();
 				name = name.substring(name.lastIndexOf("\\")+1);
 				System.out.println(name);
+				image.write(new File("c:/images/"+name));
 			}
-		} catch (FileUploadException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
