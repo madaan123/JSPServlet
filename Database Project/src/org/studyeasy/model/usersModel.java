@@ -87,4 +87,23 @@ public class usersModel {
 			return false;
 		}
 	}
+
+	public Boolean deleteUser(DataSource dataSource,int userId) {
+		// TODO Auto-generated method stub
+		Connection connect = null;
+		PreparedStatement statement = null;
+		try {
+			connect = dataSource.getConnection();
+			String query = "delete from users where users_id = ?";
+			statement = connect.prepareStatement(query);
+			statement.setInt(1, userId);
+			
+			return statement.execute();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+	}
 }

@@ -43,11 +43,20 @@ public class HomeController extends HttpServlet {
 		case "update_user":
 			UpdateUserFormLoader(request,response);
 			break;
+		case "delete_user":
+			DeleteUser(dataSource,Integer.parseInt(request.getParameter("userId")));
+			listUsers(request, response);
+			break;
 		default:
 			request.getRequestDispatcher("error.jsp").forward(request, response);
 		}
 	}
 	
+	private void DeleteUser(DataSource dataSource, int userId) {
+		// TODO Auto-generated method stub
+		new usersModel().deleteUser(dataSource,userId);
+	}
+
 	private void UpdateUserFormLoader(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
