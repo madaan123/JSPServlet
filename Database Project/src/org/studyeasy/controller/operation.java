@@ -16,33 +16,40 @@ import org.studyeasy.entity.User;
 import org.studyeasy.model.usersModel;
 
 /**
- * Servlet implementation class HomeController
+ * Servlet implementation class operation
  */
-@WebServlet("/home")
-public class HomeController extends HttpServlet {
+@WebServlet("/operation")
+public class operation extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	@Resource(name ="jdbc/project")
 	private DataSource dataSource;
-	
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String page = request.getParameter("page");
-		if(page!=null)
-		page = page.toLowerCase();
 
-		switch (page) {
-		case "home":
-			request.getRequestDispatcher("index.jsp").forward(request, response);
-			break;
-		case "listuser":
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String operation = request.getParameter("form");
+		operation = operation.toLowerCase();
+		
+		switch (operation) {
+		case "adduser_operation": {
+			User newUser = new User(request.getParameter("username"), request.getParameter("email"));
+			addUserOperation(newUser);
 			listUsers(request, response);
 			break;
-		case "adduser":
-			request.getRequestDispatcher("adduser.jsp").forward(request, response);
-			break;
+		}
 		default:
 			request.getRequestDispatcher("error.jsp").forward(request, response);
 		}
+	}
+
+	private void addUserOperation(User newUser) {
+		// TODO Auto-generated method stub
+		new usersModel().addUser(dataSource, newUser);
+		return;
 	}
 	
 	public void listUsers(HttpServletRequest request, HttpServletResponse response)

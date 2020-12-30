@@ -50,6 +50,7 @@
         <ul>
           <li class="active"><a href="${pageContext.request.contextPath}/home?page=home">Home</a></li>
           <li><a href="${pageContext.request.contextPath}/home?page=listuser">List Users</a></li>
+          <li><a href="${pageContext.request.contextPath}/home?page=adduser">ADD USER</a></li>
         </ul>
       </nav><!-- .nav-menu -->
 

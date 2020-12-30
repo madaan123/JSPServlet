@@ -1,6 +1,7 @@
 package org.studyeasy.model;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -37,7 +38,29 @@ public class usersModel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return listUsers;
+	}
+
+	public Boolean addUser(DataSource dataSource, User newUser) {
+		// TODO Auto-generated method stub
+		Connection connect = null;
+		PreparedStatement statement = null;
+		try {
+			connect = dataSource.getConnection();
+			String username = newUser.getUsername();
+			String email = newUser.getEmail();
+			String query = "insert into users(username,email) values(?,?)";
+			statement = connect.prepareStatement(query);
+			statement.setString(1, username);
+			statement.setString(2, email);
+			
+			return statement.execute();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
 	}
 }
