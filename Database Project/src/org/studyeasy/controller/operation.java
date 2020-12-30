@@ -26,12 +26,12 @@ public class operation extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String operation = request.getParameter("form");
+		String userId = request.getParameter("userId");
 		operation = operation.toLowerCase();
 		
 		switch (operation) {
@@ -41,9 +41,21 @@ public class operation extends HttpServlet {
 			listUsers(request, response);
 			break;
 		}
+		case "updateuser_operation": {
+			User newUser = new User(Integer.parseInt(userId),request.getParameter("username"), request.getParameter("email"));
+			updateUserOperation(newUser);
+			listUsers(request, response);
+			break;
+		}
 		default:
 			request.getRequestDispatcher("error.jsp").forward(request, response);
 		}
+	}
+
+	private void updateUserOperation(User newUser) {
+		// TODO Auto-generated method stub
+		new usersModel().updateUser(dataSource, newUser);
+		return;
 	}
 
 	private void addUserOperation(User newUser) {

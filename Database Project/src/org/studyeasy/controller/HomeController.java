@@ -40,11 +40,20 @@ public class HomeController extends HttpServlet {
 		case "adduser":
 			request.getRequestDispatcher("adduser.jsp").forward(request, response);
 			break;
+		case "update_user":
+			UpdateUserFormLoader(request,response);
+			break;
 		default:
 			request.getRequestDispatcher("error.jsp").forward(request, response);
 		}
 	}
 	
+	private void UpdateUserFormLoader(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		request.getRequestDispatcher("updateUser.jsp").forward(request, response);
+	}
+
 	public void listUsers(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException{
 		List<User> listUsers = new ArrayList<User>();

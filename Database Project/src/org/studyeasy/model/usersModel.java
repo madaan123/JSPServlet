@@ -63,4 +63,28 @@ public class usersModel {
 			return false;
 		}
 	}
+
+	public Boolean updateUser(DataSource dataSource, User updatedUser) {
+		// TODO Auto-generated method stub
+		Connection connect = null;
+		PreparedStatement statement = null;
+		try {
+			connect = dataSource.getConnection();
+			String username = updatedUser.getUsername();
+			String email = updatedUser.getEmail();
+			int userId = updatedUser.getUsers_id();
+			String query = "update users set username = ?, email = ? where users_id = ?";
+			statement = connect.prepareStatement(query);
+			statement.setString(1, username);
+			statement.setString(2, email);
+			statement.setInt(3, userId);
+			
+			return statement.execute();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+	}
 }
