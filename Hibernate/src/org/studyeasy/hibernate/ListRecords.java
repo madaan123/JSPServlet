@@ -25,7 +25,10 @@ public class ListRecords {
 			// Perform operation
 			List<Users> users = session.createQuery("from users").getResultList();
 			
-			for(Users user:users) {
+			// Where clause
+			List<Users> users2 = session.createQuery("from users where first_name='rahul' ").getResultList();
+			
+			for(Users user:users2) {
 				System.out.println(user);
 			}
 			
