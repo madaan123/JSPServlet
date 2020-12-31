@@ -50,4 +50,25 @@ public class FilesDAO {
 			factory.close();
 		}
 	}
+
+	public void updateFileDetails(int fileId, String label, String caption) {
+		// TODO Auto-generated method stub
+Session session = factory.getCurrentSession();
+		
+		try {
+			// Start transaction
+			session.beginTransaction();
+
+			// Perform operation
+			Files file = session.get(Files.class, fileId);
+			file.setLabel(label);
+			file.setCaption(caption);
+			// Commit Transaction
+			session.getTransaction().commit();
+		} finally {
+			// TODO: handle finally clause
+			session.close();
+			factory.close();
+		}
+	}
 }

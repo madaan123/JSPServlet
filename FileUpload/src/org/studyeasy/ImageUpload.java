@@ -34,13 +34,17 @@ public class ImageUpload extends HttpServlet {
 			break;
 		case "listingImages":
 			listImages(request, response);
+		case "updateInformation":
+			updateInformation(request, response);
+			break;
 		default:
 			request.getRequestDispatcher("image_upload.jsp").forward(request, response);
 		}
 	}
-	
+
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String action = request.getParameter("action");
 		switch (action) {
@@ -50,6 +54,17 @@ public class ImageUpload extends HttpServlet {
 		default:
 			request.getRequestDispatcher("image_upload.jsp").forward(request, response);
 		}
+	}
+
+	private void updateInformation(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		int FileId = Integer.parseInt(request.getParameter("fileId"));
+		String label = request.getParameter("label");
+		String caption = request.getParameter("caption");
+		Files file = new Files(FileId, label, caption);
+		new FilesDAO().updateFileDetails(FileId,label,caption);
+		listImages(request, response);
 	}
 
 	private void listImages(HttpServletRequest request, HttpServletResponse response)

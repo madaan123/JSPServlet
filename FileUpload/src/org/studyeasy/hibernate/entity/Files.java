@@ -28,6 +28,12 @@ public class Files {
 		this.FileName = fileName;
 	}
 
+	public Files(int id, String label, String caption) {
+		this.id = id;
+		this.label = label;
+		this.caption = caption;
+	}
+
 	public int getId() {
 		return id;
 	}
