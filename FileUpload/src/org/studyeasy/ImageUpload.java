@@ -22,6 +22,7 @@ import org.studyeasy.hibernate.entity.Files;
 @WebServlet("/ImageUpload")
 public class ImageUpload extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	String path = "c:/images/";
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -41,6 +42,9 @@ public class ImageUpload extends HttpServlet {
 	private void listImages(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		List<Files> files = new FilesDAO().listFiles();
+		request.setAttribute("files", files);
+		request.setAttribute("path", path);
 		request.getRequestDispatcher("listFiles.jsp").forward(request, response);
 	}
 
@@ -50,7 +54,6 @@ public class ImageUpload extends HttpServlet {
 		ServletFileUpload upload = new ServletFileUpload(new DiskFileItemFactory());
 
 		try {
-			String path = "c:/images/";
 			List<FileItem> images = upload.parseRequest(request);
 			for (FileItem image : images) {
 				String name = image.getName();
