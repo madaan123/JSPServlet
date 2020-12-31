@@ -51,9 +51,20 @@ public class ImageUpload extends HttpServlet {
 		case "listingImages":
 			listImages(request, response);
 			break;
+		case "viewImage":
+			viewImage(request,response);
+			break;
 		default:
 			request.getRequestDispatcher("image_upload.jsp").forward(request, response);
 		}
+	}
+
+	private void viewImage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		int FileId = Integer.parseInt(request.getParameter("fileId"));
+		Files File = new FilesDAO().getFile(FileId);
+		System.out.println(File);
+		//request.getRequestDispatcher("view_image.jsp").forward(request, response);
 	}
 
 	private void updateInformation(HttpServletRequest request, HttpServletResponse response)
