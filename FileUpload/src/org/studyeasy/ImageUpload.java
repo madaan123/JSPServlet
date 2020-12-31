@@ -23,25 +23,54 @@ import org.studyeasy.hibernate.entity.Files;
 public class ImageUpload extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//ServletFileUpload upload = new ServletFileUpload();
+		String action = request.getParameter("action");
+		switch (action) {
+		case "FileUpload":
+			fileUpload(request, response);
+			break;
+		case "listingImages":
+			listImages(request, response);
+		default:
+			request.getRequestDispatcher("image_upload.jsp").forward(request, response);
+		}
+	}
+
+	private void listImages(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		request.getRequestDispatcher("listFiles.jsp").forward(request, response);
+	}
+
+	public void fileUpload(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		ServletFileUpload upload = new ServletFileUpload(new DiskFileItemFactory());
-		
+
 		try {
+			String path = "c:/images/";
 			List<FileItem> images = upload.parseRequest(request);
-			for(FileItem image: images) {
+			for (FileItem image : images) {
 				String name = image.getName();
-				name = name.substring(name.lastIndexOf("\\")+1);
+				try {
+					name = name.substring(name.lastIndexOf("\\") + 1);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 				System.out.println(name);
-				new FilesDAO().addFileDetails(new Files(name));
-				image.write(new File("c:/images/"+name));
+				File file = new File(path + name);
+				if (!file.exists()) {
+					new FilesDAO().addFileDetails(new Files(name));
+					image.write(file);
+				}
 			}
+			listImages(request, response);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
-		
+		}
 	}
 
 }
