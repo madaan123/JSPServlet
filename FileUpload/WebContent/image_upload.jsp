@@ -10,6 +10,8 @@
 <form action="ImageUpload?action=FileUpload" method="post" enctype="multipart/form-data">
 Select Images:<input type="file" name="files" multiple="multiple">
 <input type="submit" value="upload">
+<br/>
+<a href="${pageContext.request.contextPath}/ImageUpload?action=listingImages"> List Images</a>
 </form>
 </body>
 </html>
