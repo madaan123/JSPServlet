@@ -35,6 +35,10 @@ public class ListRecords {
 			// Update query
 			session.createQuery("update users set password='rahul@123' where first_name='rahul' ").executeUpdate();
 			
+			// Delete query
+			session.createQuery("delete from users where first_name='rahul' ").executeUpdate();
+			
+			
 		} finally {
 			// TODO: handle finally clause
 			session.close();
