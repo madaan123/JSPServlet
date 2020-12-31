@@ -32,6 +32,9 @@ public class ListRecords {
 				System.out.println(user);
 			}
 			
+			// Update query
+			session.createQuery("update users set password='rahul@123' where first_name='rahul' ").executeUpdate();
+			
 		} finally {
 			// TODO: handle finally clause
 			session.close();
