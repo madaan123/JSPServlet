@@ -11,9 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.studyeasy.hibernate.DAO.FilesDAO;
+import org.studyeasy.hibernate.entity.Files;
 
 /**
  * Servlet implementation class ImageUpload
@@ -33,12 +34,13 @@ public class ImageUpload extends HttpServlet {
 				String name = image.getName();
 				name = name.substring(name.lastIndexOf("\\")+1);
 				System.out.println(name);
+				new FilesDAO().addFileDetails(new Files(name));
 				image.write(new File("c:/images/"+name));
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		} 
 		
 	}
 
