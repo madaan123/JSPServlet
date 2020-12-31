@@ -91,4 +91,25 @@ public class FilesDAO {
 			factory.close();
 		}
 	}
+
+	public void deleteFile(int fileId) {
+		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub
+		Session session = factory.getCurrentSession();
+
+		try {
+			// Start transaction
+			session.beginTransaction();
+
+			// Perform operation
+			Files file = session.get(Files.class, fileId);
+			// Commit Transaction
+			session.delete(file);
+			session.getTransaction().commit();
+		} finally {
+			// TODO: handle finally clause
+			session.close();
+			factory.close();
+		}
+	}
 }

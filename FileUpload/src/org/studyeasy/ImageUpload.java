@@ -54,9 +54,27 @@ public class ImageUpload extends HttpServlet {
 		case "viewImage":
 			viewImage(request,response);
 			break;
+		case "deleteImage":
+			deleteImage(request,response);
+			break;
 		default:
 			request.getRequestDispatcher("image_upload.jsp").forward(request, response);
 		}
+	}
+
+	private void deleteImage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int FileId = Integer.parseInt(request.getParameter("fileId"));
+		Files file = new FilesDAO().getFile(FileId);
+		// delete file in database
+		new FilesDAO().deleteFile(FileId);
+		// delete file in filesystem
+		File fileOnDisc = new File(path+file.getFileName());
+		if(fileOnDisc.delete()) {
+			System.out.println("File got deleted from system");
+		}else {
+			System.out.println("File not deleted from system");
+		}
+		listImages(request, response);
 	}
 
 	private void viewImage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

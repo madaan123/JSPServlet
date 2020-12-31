@@ -53,7 +53,9 @@
 		out.print("<td>"+form+"</td>");
 		
 		out.print("<td><ul><li><a href='"+request.getContextPath()+"/ImageUpload?action=viewImage&fileId="+
-				fileId+"'>View Image</a></li></ul></td></tr>");
+				fileId+"'>View</a></li>");
+		out.print("<li><a href='"+request.getContextPath()+"/ImageUpload?action=deleteImage&fileId="+
+				fileId+"' onclick=\"if(!confirm('Are you sure you want to delete the image?')) return false\" >Delete</a></li></ul></td></tr>");
 	}
 %>
 
