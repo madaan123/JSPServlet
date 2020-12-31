@@ -19,7 +19,9 @@ public class App {
 		try {
 			// Create object of entity class 
 			Users user = new Users("ashish", "ashish123", "ashish", "madaan");
-			
+//			Users user1 = new Users("rahul", "rahul123", "rahul", "roy");
+//			Users user2 = new Users("ria", "ria123", "ria", "kapoor");
+//			Users user3 = new Users("sam", "sam123", "sam", "arora");
 			// Start transaction
 			session.beginTransaction();
 			

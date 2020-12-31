@@ -23,7 +23,10 @@ public class Retrieve {
 
 			// Perform operation
 			user = session.get(Users.class, 1);
-
+			// Update User Info
+			// user.setUsername("admin@studyeasy");
+			// Delete User
+			session.delete(user);
 			// Commit Transaction
 			session.getTransaction().commit();
 			System.out.println(user);
